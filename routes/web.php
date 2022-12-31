@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Livewire\AboutComponent;
 use App\Http\Livewire\Admin\AdminAddCategoryComponent;
 use App\Http\Livewire\Admin\AdminAddHomeSliderComponent;
 use App\Http\Livewire\Admin\AdminAddProductComponent;
@@ -17,6 +18,7 @@ use App\Http\Livewire\CartComponent;
 use App\Http\Livewire\CategoryComponent;
 use App\Http\Livewire\ShopComponent;
 use App\Http\Livewire\CheckoutComponent;
+use App\Http\Livewire\ContactComponent;
 use App\Http\Livewire\DetailsComponent;
 use App\Http\Livewire\SearchComponent;
 use App\Http\Livewire\User\UserDashboardComponent;
@@ -42,10 +44,13 @@ Route::get('/', HomeComponent::class)->name('home.index');
 
 Route::get('/shop', ShopComponent::class)->name('shop');
 
+Route::get('/about', AboutComponent::class)->name('about');
+
+Route::get('/contact', ContactComponent::class)->name('contact');
+
 Route::get('/product/{slug}', DetailsComponent::class)->name('product.details');
 
 Route::get('/cart', CartComponent::class)->name('shop.cart');
-Route::post('/addcart/{id}', [HomeController::class,'addcart']);
 
 Route::get('/wishlist', WishlistComponent::class)->name('shop.wishlist');
 
