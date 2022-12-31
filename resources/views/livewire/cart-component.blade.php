@@ -20,6 +20,11 @@
                                         <strong>Success | {{Session::get('success_message')}}</strong>
                                     </div>        
                                     @endif
+                                    @if(Session::has('error_message'))
+                                    <div class="alert alert-warning" role="alert">
+                                        <strong>Notice | {{Session::get('error_message')}}</strong>
+                                    </div>        
+                                    @endif
 
                                     @if(Cart::instance('cart')->count()>0)
                             <table class="table shopping-summery text-center clean">
@@ -36,11 +41,11 @@
                                 <tbody>
                                     
                                     @foreach (Cart::instance('cart')->content() as $item)
-                                        
+                                      
                                     <tr>
                                         <td class="image product-thumbnail"><img src="{{ asset('assets/imgs/products')}}/{{$item->model->image}}" alt="#"></td>
                                         <td class="product-des product-name">
-                                            <h5 class="product-name"><a href="product-details.html">{{$item->model->name}}</a></h5>
+                                            <h5 class="product-name"><a href="{{route('product.details',['slug'=>$item->model->slug])}}">{{$item->model->name}}</a></h5>
                                         </td>
                                         <td class="price" data-title="Price"><span>${{$item->model->regular_price}} </span></td>
                                         <td class="text-center" data-title="Stock">

@@ -26,16 +26,6 @@
                 <div class="row align-items-center">
                     <div class="col-xl-3 col-lg-4">
                         <div class="header-info">
-                        <ul>
-                                <li>
-                                    <a class="language-dropdown-active" href="#"> <i class="fi-rs-world"></i> English <i class="fi-rs-angle-small-down"></i></a>
-                                    <ul class="language-dropdown">
-                                        <li><a href="#"><img src="assets/imgs/theme/flag-fr.png" alt="">Français</a></li>
-                                        <li><a href="#"><img src="assets/imgs/theme/flag-dt.png" alt="">Deutsch</a></li>
-                                        <li><a href="#"><img src="assets/imgs/theme/flag-ru.png" alt="">Pусский</a></li>
-                                    </ul>
-                                </li>                                
-                            </ul>
                         </div>
                     </div>
                     <div class="col-xl-6 col-lg-4">
@@ -77,17 +67,13 @@
                     <div class="logo logo-width-1">
                         <a href="index.html"><img src="assets/imgs/logo/logo.png" alt="logo"></a>
                     </div>
+
                     <div class="header-right">
                         @livewire('header-search-component')
-
-                        <div class="header-action-right">
-                            <div class="header-action-2">
-                          @livewire('wishlist-icon-component')
-                          @livewire('cart-icon-component')
-                            </div>
-                        </div>
                     </div>
+                    
                 </div>
+                
             </div>
         </div>
         <div class="header-bottom header-bottom-bg-color sticky-bar">
@@ -129,8 +115,12 @@
                             </nav>
                         </div>
                     </div>
-                    <div class="hotline d-none d-lg-block">
-                        <p><i class="fi-rs-smartphone"></i><span>Toll Free</span> (+1) 0000-000-000 </p>
+                    
+                    <div class="header-action-right">
+                        <div class="header-action-2">
+                      @livewire('wishlist-icon-component')
+                      @livewire('cart-icon-component')
+                        </div>
                     </div>
                     <p class="mobile-promotion">Happy <span class="text-brand">Mother's Day</span>. Big Sale Up to 40%</p>
                     <div class="header-action-right d-block d-lg-none">

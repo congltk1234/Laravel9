@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Product;
 use Livewire\Component;
 use Cart;
 
@@ -11,19 +12,27 @@ class CartComponent extends Component
 
     public function increaseQuantity($rowId)
     {
-        $product = Cart::get($rowId);
+        $product = Cart::instance('cart')->get($rowId);
+        $stock_quantity = Product::where('name', $product->name)->first()->quantity;
+        if ($product->qty < $stock_quantity){
         $qty = $product->qty + 1;
         Cart::instance('cart')->update($rowId, $qty);
         $this->emitTo('cart-icon-component','refreshComponent');
-    
+        }
+        else{
+            session()->flash('error_message','Item out of stock!');
+        }
     }
 
     public function decreaseQuantity($rowId)
     {
-        $product = Cart::get($rowId);
+        
+        $product = Cart::instance('cart')->get($rowId);
+
         $qty = $product->qty - 1;
         Cart::instance('cart')->update($rowId, $qty);
         $this->emitTo('cart-icon-component','refreshComponent');
+
     
     }
 

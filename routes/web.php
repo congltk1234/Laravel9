@@ -87,6 +87,8 @@ Route::middleware(['auth','authadmin'])->group(function(){
     Route::get('/admin/slider/add', AdminAddHomeSliderComponent::class)->name('admin.home.slide.add');
     Route::get('/admin/slider/edit/{slide_id}', AdminEditHomeSliderComponent::class)->name('admin.home.slide.edit');
 
+    // Brand
+    Route::get('admin/brands', App\Http\Livewire\Admin\Brand\Index::class);
 
 });
 
