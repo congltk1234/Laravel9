@@ -108,7 +108,7 @@
                                         <div class="product-category">
                                             <a href="shop.html">Music</a>
                                         </div>
-                                        <h2><a href="product-details.html">{{$product->name}}</a></h2>
+                                        <h2><a href="{{route('product.details', ['slug'=>$product->slug])}}">{{$product->name}}</a></h2>
                                         <div class="rating-result" title="90%">
                                             <span>
                                                 <span>90%</span>
@@ -129,6 +129,15 @@
                                                 <a aria-label="Add To Cart" class="action-btn hover-up" href="#" wire:click.prevent="store({{$product->id}}, '{{$product->name}}', {{$product->regular_price}})"><i class="fi-rs-shopping-bag-add"></i></a>
                                         </div>
                                     </div>
+                                    <form action="{{url('addcart', $product->id)}}" method="post">
+                                        @csrf
+                                        <input type="number" value="1" min="1" class="form-control" 
+                                        style="width:100px" name="quantity">
+                      
+                                        <br>
+                      
+                                        <input class="btn btn-primary" type="submit" value="Add Cart">
+                                      </form>
                                 </div>
                             </div>
                             @endforeach

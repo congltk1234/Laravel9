@@ -13,7 +13,7 @@
             <div class="container">
                 <div class="breadcrumb">
                     <a href="/" rel="nofollow">Home</a>
-                    <span>All Categories</span> 
+                    <span>All Slides</span> 
                 </div>
             </div>
         </div>
@@ -28,7 +28,7 @@
                             
                             <div class="col-md-6"><h4 class="text-muted">All Categories</h4></div>
                                 <div class="col-md-6">
-                                    <a href="{{route('admin.category.add')}}" class="btn btn-success float-end">Add New Category</a>
+                                    <a href="{{route('admin.home.slide.add')}}" class="btn btn-success float-end">Add New Slides</a>
                                 </div>
                             </div>
                         </div>
@@ -40,32 +40,43 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Name</th>
-                                        <th>Slug</th>
+                                        <th>Image</th>
+                                        <th>TopTitle</th>
+                                        <th>Title</th>
+                                        <th>SubTitle</th>
+                                        <th>Offer</th>
+                                        <th>Link</th>
+                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
                                     @php
-                                        $i = ($categories->currentPage()-1)*$categories->perPage();
+                                        $i = ($slides->currentPage()-1)*$slides->perPage();
+            
                                     @endphp
                             
-                                    @foreach ($categories as $category)
+                                    @foreach ($slides as $slide)
                                     <tr>
-                                        <td class="col-sm-1">{{++$i}}</td>
-                                        <td class="col-sm-4"> <a href="{{route('product.category', ['slug'=>$category->slug])}}">{{$category->name}}</a></td>
-                                        <td class="col-sm-4">{{$category->slug}}</td>
-                                        <td class="col-sm-2">
-                                            <a href="{{route('admin.category.edit',['category_id'=>$category->id])}}" class="text-info">Edit</a>
-                                            <a href="#" class="text-danger" onclick="deleteConfirmation({{$category->id}})" style="margin-left:20px;">Delete</a>
+                                        <td>{{++$i}}</td>
+                                        <td> <img src="{{asset('assets/imgs/slider')}}/{{$slide->image}}" width="80"></td>
+                                        <td>{{$slide->top_title}}</td>
+                                        <td>{{$slide->title}}</td>
+                                        <td>{{$slide->subtitle}}</td>
+                                        <td>{{$slide->offer}}</td>
+                                        <td>{{$slide->link}}</td>
+                                        <td>{{$slide->status == 1 ? 'Active':'Inactive'}}</td>
+                                        <td>
+                                            <a href="{{route('admin.home.slide.edit',['slide_id'=>$slide->id])}}" class="text-info">Edit</a>
+                                            <a href="#" class="text-danger" onclick="deleteConfirmation({{$slide->id}})" style="margin-left:20px;">Delete</a>
                                         </td>
                                     </tr>
                                         
                                     @endforeach
                                 </tbody>
                             </table>
-                            {{$categories->links()}}
+                            {{$slides->links()}}
                         </div>
                     </div>
                     </div>
@@ -80,9 +91,9 @@
         <div class="modal-content">
             <div class="modal-body pb-30 pt-30">
                 <div class="col-md-12 text-center">
-                    <h4 class="pb-3">Do you want to delete this record?</h4>
+                    <h4 class="pb-3">Do you want to delete this slide?</h4>
                     <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#deleteConfirmation">Cancel</button>
-                    <button type="button" class="btn btn-danger" onclick="deleteCategory()">Delete</button>
+                    <button type="button" class="btn btn-danger" onclick="deleteSlide()">Delete</button>
                 </div>
             </div>
         </div>
@@ -93,12 +104,12 @@
     <script>
         function deleteConfirmation(id) 
         {
-            @this.set('category_id',id);
+            @this.set('slide_id',id);
             $('#deleteConfirmation').modal('show');
         }
         
-        function deleteCategory(params) {
-            @this.call('deleteCategory');
+        function deleteSlide(params) {
+            @this.call('deleteSlide');
             $('#deleteConfirmation').modal('hide');
 
         }

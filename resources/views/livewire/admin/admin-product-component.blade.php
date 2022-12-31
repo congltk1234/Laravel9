@@ -60,7 +60,7 @@
                                     <tr>
                                         <td class="col-sm">{{++$i}}</td>
                                         <td class="col-sm-1"><img src="{{asset('assets/imgs/products')}}/{{$product->image}}" alt="{{$product->name}}" width="70"></td>
-                                        <td>{{$product->name}}</td>
+                                        <td><a href="{{route('product.details', ['slug'=>$product->slug])}}"> {{$product->name}}</a></td>
                                         <td>{{$product->stock_status}}</td>
                                         <td class="col-sm-1">{{$product->quantity}}</td>
                                         <td>${{$product->regular_price}}</td>
