@@ -40,8 +40,10 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
+                                        <th>Image</th>
                                         <th>Name</th>
                                         <th>Slug</th>
+                                        <th>Popular</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -53,10 +55,12 @@
                             
                                     @foreach ($categories as $category)
                                     <tr>
-                                        <td class="col-sm-1">{{++$i}}</td>
-                                        <td class="col-sm-4"> <a href="{{route('product.category', ['slug'=>$category->slug])}}">{{$category->name}}</a></td>
-                                        <td class="col-sm-4">{{$category->slug}}</td>
-                                        <td class="col-sm-2">
+                                        <td>{{++$i}}</td>
+                                        <td><img src="{{asset('assets/imgs/categories')}}/{{$category->image}}" alt="{{$category->name}}" width="70"></td>
+                                        <td> <a href="{{route('product.category', ['slug'=>$category->slug])}}">{{$category->name}}</a></td>
+                                        <td>{{$category->slug}}</td>
+                                        <td>{{$category->is_popular}}</td>
+                                        <td>
                                             <a href="{{route('admin.category.edit',['category_id'=>$category->id])}}" class="text-info">Edit</a>
                                             <a href="#" class="text-danger" onclick="deleteConfirmation({{$category->id}})" style="margin-left:20px;">Delete</a>
                                         </td>

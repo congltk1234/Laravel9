@@ -33,7 +33,6 @@ class ShopComponent extends Component
     {
         return redirect('login');
     }
-    
     }
 
     public function changePageSize($size)
