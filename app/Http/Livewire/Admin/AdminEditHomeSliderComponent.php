@@ -55,7 +55,7 @@ class AdminEditHomeSliderComponent extends Component
 
         if($this->newimage)
         {
-            unlink('assert/imgs/slider/'.$slide->image);
+            unlink('assets/imgs/slider/'.$slide->image);
             $imageName= Carbon::now()->timestamp.'.'.$this->newimage->extension();
             $this->newimage->storeAs('slider',$imageName);
             $slide->image = $imageName;

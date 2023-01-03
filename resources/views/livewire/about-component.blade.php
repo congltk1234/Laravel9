@@ -19,7 +19,7 @@
                     <p>Therefore, online shopping becomes more and more important and necessary, you just need to spend a little time to be able to search and shop for the right products at any time. Online shopping store never closes, you can shop at any time of the day. When shopping online, you can easily compare and choose the best product that best suits your requirements. </p>
                 </div>
                 <div class="col-lg-6">
-                    <img src="assets/imgs/page/about-10.png" alt="">
+                    <img src="{{asset('assets/imgs/page/about-1.png')}}" alt="">
                 </div>
             </div>
         </div>
