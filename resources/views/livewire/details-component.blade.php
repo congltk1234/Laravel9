@@ -24,7 +24,7 @@
                                             <figure class="border-radius-10">
                                                 <img src="{{ asset('assets/imgs/products')}}/{{$product->image}}" alt="product image">
                                             </figure>
-                                            <figure class="border-radius-10">
+                                            {{-- <figure class="border-radius-10">
                                                 <img src="{{ asset('assets/imgs/shop/product-')}}{{$product->id}}-1.jpg" alt="product image">
                                             </figure>
                                             <figure class="border-radius-10">
@@ -41,10 +41,10 @@
                                             </figure>
                                             <figure class="border-radius-10">
                                                 <img src="{{ asset('assets/imgs/shop/product-')}}{{$product->id}}-7.jpg" alt="product image">
-                                            </figure>
+                                            </figure> --}}
                                         </div>
                                         <!-- THUMBNAILS -->
-                                        <div class="slider-nav-thumbnails pl-15 pr-15">
+                                        {{-- <div class="slider-nav-thumbnails pl-15 pr-15">
                                             <div><img src="{{ asset('assets/imgs/shop/thumbnail-3.jpg') }}" alt="product image"></div>
                                             <div><img src="{{ asset('assets/imgs/shop/thumbnail-4.jpg') }}" alt="product image"></div>
                                             <div><img src="{{ asset('assets/imgs/shop/thumbnail-5.jpg') }}" alt="product image"></div>
@@ -52,7 +52,7 @@
                                             <div><img src="{{ asset('assets/imgs/shop/thumbnail-7.jpg') }}" alt="product image"></div>
                                             <div><img src="{{ asset('assets/imgs/shop/thumbnail-8.jpg') }}" alt="product image"></div>
                                             <div><img src="{{ asset('assets/imgs/shop/thumbnail-9.jpg') }}" alt="product image"></div>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                     <!-- End Gallery -->
                                     <div class="social-icons single-share">
@@ -69,9 +69,9 @@
                                     <div class="detail-info">
                                         <h2 class="title-detail">{{$product->name}}</h2>
                                         <div class="product-detail-rating">
-                                            <div class="pro-details-brand">
+                                            {{-- <div class="pro-details-brand">
                                                 <span> Brands: <a href="shop.html">Bootstrap</a></span>
-                                            </div>
+                                            </div> --}}
                                             <div class="product-rate-cover text-end">
                                                 <div class="product-rate d-inline-block">
                                                     <div class="product-rating" style="width:90%">
@@ -98,7 +98,7 @@
                                                 <li><i class="fi-rs-credit-card mr-5"></i> Cash on Delivery available</li>
                                             </ul>
                                         </div> --}}
-                                        <div class="attr-detail attr-color mb-15">
+                                        {{-- <div class="attr-detail attr-color mb-15">
                                             <strong class="mr-10">Color</strong>
                                             <ul class="list-filter color-filter">
                                                 <li><a href="#" data-color="Red"><span class="product-color-red"></span></a></li>
@@ -119,8 +119,14 @@
                                                 <li><a href="#">XL</a></li>
                                                 <li><a href="#">XXL</a></li>
                                             </ul>
-                                        </div>
+                                        </div> --}}
+
+                                        @php
+                                        $w_items = Cart::instance('wishlist')->content()->pluck('id');
+                                        @endphp
+
                                         <div class="bt-1 border-color-1 mt-30 mb-30"></div>
+                                       
                                         <div class="detail-extralink">
                                             <div class="detail-qty border radius">
                                                 <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
@@ -129,14 +135,19 @@
                                             </div>
                                             <div class="product-extra-link2">
                                                 <button type="button" class="button button-add-to-cart" wire:click.prevent="store({{$product->id}}, '{{$product->name}}', {{$product->regular_price}})">Add to cart</button>
-                                                <a aria-label="Add To Wishlist" class="action-btn hover-up" href="wishlist.php"><i class="fi-rs-heart"></i></a>
-                                                <a aria-label="Compare" class="action-btn hover-up" href="compare.php"><i class="fi-rs-shuffle"></i></a>
+                                            @if ($w_items->contains($product->id))
+                                                <a aria-label="Remove from Wishlist" class="action-btn hover-up wishlisted" href="#" wire:click.prevent="removeFromWishlist({{$product->id}})"><i class="fi-rs-heart"></i></a>
+                                            
+                                            @else  
+                                    
+                                                <a aria-label="Add To Wishlist" class="action-btn hover-up" href="#" wire:click.prevent="addToWishlist({{$product->id}}, '{{$product->name}}',  {{$product->regular_price}})"><i class="fi-rs-heart"></i></a>
+                                            @endif
                                             </div>
                                         </div>
                                         <ul class="product-meta font-xs color-grey mt-50">
-                                            <li class="mb-5">SKU: <a href="#">FWM15VKT</a></li>
-                                            <li class="mb-5">Tags: <a href="#" rel="tag">Cloth</a>, <a href="#" rel="tag">Women</a>, <a href="#" rel="tag">Dress</a> </li>
-                                            <li>Availability:<span class="in-stock text-success ml-5">8 Items In Stock</span></li>
+                                            <li class="mb-5">SKU: <a href="#">{{$product->SKU}}</a></li>
+                                            <li class="mb-5">Tags: <a href="#" rel="tag">{{$product->category->name}}</a>
+                                            <li>Availability:<span class="in-stock text-success ml-5">{{$product->quantity}}</span></li>
                                         </ul>
                                     </div>
                                     <!-- Detail Info -->
@@ -450,62 +461,17 @@
                         </div>
                     </div>
                     <div class="col-lg-3 primary-sidebar sticky-sidebar">
+                      
                         <div class="widget-category mb-30">
                             <h5 class="section-title style-1 mb-30 wow fadeIn animated">Category</h5>
                             <ul class="categories">
-                                <li><a href="shop.html">Shoes & Bags</a></li>
-                                <li><a href="shop.html">Blouses & Shirts</a></li>
-                                <li><a href="shop.html">Dresses</a></li>
-                                <li><a href="shop.html">Swimwear</a></li>
-                                <li><a href="shop.html">Beauty</a></li>
-                                <li><a href="shop.html">Jewelry & Watch</a></li>
-                                <li><a href="shop.html">Accessories</a></li>
+                                @foreach ($categories as $category)
+                                    <li><a href="{{route('product.category', ['slug'=>$category->slug])}}">{{$category->name}}</a></li>
+                                @endforeach
+
                             </ul>
                         </div>
-                        <!-- Fillter By Price -->
-                        <div class="sidebar-widget price_range range mb-30">
-                            <div class="widget-header position-relative mb-20 pb-10">
-                                <h5 class="widget-title mb-10">Fill by price</h5>
-                                <div class="bt-1 border-color-1"></div>
-                            </div>
-                            <div class="price-filter">
-                                <div class="price-filter-inner">
-                                    <div id="slider-range"></div>
-                                    <div class="price_slider_amount">
-                                        <div class="label-input">
-                                            <span>Range:</span><input type="text" id="amount" name="price" placeholder="Add Your Price">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="list-group">
-                                <div class="list-group-item mb-10 mt-10">
-                                    <label class="fw-900">Color</label>
-                                    <div class="custome-checkbox">
-                                        <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox1" value="">
-                                        <label class="form-check-label" for="exampleCheckbox1"><span>Red (56)</span></label>
-                                        <br>
-                                        <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox2" value="">
-                                        <label class="form-check-label" for="exampleCheckbox2"><span>Green (78)</span></label>
-                                        <br>
-                                        <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox3" value="">
-                                        <label class="form-check-label" for="exampleCheckbox3"><span>Blue (54)</span></label>
-                                    </div>
-                                    <label class="fw-900 mt-15">Item Condition</label>
-                                    <div class="custome-checkbox">
-                                        <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox11" value="">
-                                        <label class="form-check-label" for="exampleCheckbox11"><span>New (1506)</span></label>
-                                        <br>
-                                        <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox21" value="">
-                                        <label class="form-check-label" for="exampleCheckbox21"><span>Refurbished (27)</span></label>
-                                        <br>
-                                        <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox31" value="">
-                                        <label class="form-check-label" for="exampleCheckbox31"><span>Used (45)</span></label>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="shop.html" class="btn btn-sm btn-default"><i class="fi-rs-filter mr-5"></i> Fillter</a>
-                        </div>
+         
                         <!-- Product sidebar Widget -->
                         <div class="sidebar-widget product-sidebar  mb-30 p-30 bg-grey border-radius-10">
                             <div class="widget-header position-relative mb-20 pb-10">
