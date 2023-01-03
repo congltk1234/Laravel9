@@ -64,6 +64,7 @@ Route::get('/search', SearchComponent::class)->name('product.search');
 
 
 
+
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
@@ -88,7 +89,6 @@ Route::middleware(['auth','authadmin'])->group(function(){
     Route::get('/admin/slider/edit/{slide_id}', AdminEditHomeSliderComponent::class)->name('admin.home.slide.edit');
 
 });
-
 
 
 Route::middleware('auth')->group(function () {
