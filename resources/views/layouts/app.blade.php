@@ -43,7 +43,8 @@
                         <div class="header-info header-info-right">
                             @auth
                             <ul>                                
-                                <li><i class="fi-rs-user"></i> {{Auth::user()->name }} /
+                                <li> 
+                                    <li><a href="{{ route('profile.edit') }}"><i class="fi-rs-user"></i> {{Auth::user()->name }} /</a>
                                     <form method='POST' action="{{ route('logout') }}">
                                         @csrf 
                                         <a href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();">Logout </a>
@@ -105,7 +106,7 @@
                                             </ul>
                                             @else
                                                 <ul class="sub-menu">
-                                                    <li><a href="{{ route('user.dashboard') }}">Dashboard</a></li>
+                                                    <li><a href="{{ route('profile.edit') }}">Profile</a></li>
                                                 </ul>
                                             @endif
                                         
