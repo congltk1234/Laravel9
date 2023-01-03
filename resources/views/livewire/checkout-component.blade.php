@@ -12,37 +12,7 @@
         </div>
         <section class="mt-50 mb-50">
             <div class="container">
-                <div class="row">
-                    <div class="col-lg-6 mb-sm-15">
-                        <div class="toggle_info">
-                            <span><i class="fi-rs-user mr-10"></i><span class="text-muted">Already have an account?</span> <a href="#loginform" data-bs-toggle="collapse" class="collapsed" aria-expanded="false">Click here to login</a></span>
-                        </div>
-                        <div class="panel-collapse collapse login_form" id="loginform">
-                            <div class="panel-body">
-                                <p class="mb-30 font-sm">If you have shopped with us before, please enter your details below. If you are a new customer, please proceed to the Billing &amp; Shipping section.</p>
-                                <form method="post">
-                                    <div class="form-group">
-                                        <input type="text" name="email" placeholder="Username Or Email">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="password" name="password" placeholder="Password">
-                                    </div>
-                                    <div class="login_footer form-group">
-                                        <div class="chek-form">
-                                            <div class="custome-checkbox">
-                                                <input class="form-check-input" type="checkbox" name="checkbox" id="remember" value="">
-                                                <label class="form-check-label" for="remember"><span>Remember me</span></label>
-                                            </div>
-                                        </div>
-                                        <a href="#">Forgot password?</a>
-                                    </div>
-                                    <div class="form-group">
-                                        <button class="btn btn-md" name="login">Log in</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
+                {{-- <div class="row">
                     <div class="col-lg-6">
                         <div class="toggle_info">
                             <span><i class="fi-rs-label mr-10"></i><span class="text-muted">Have a coupon?</span> <a href="#coupon" data-bs-toggle="collapse" class="collapsed" aria-expanded="false">Click here to enter your code</a></span>
@@ -61,7 +31,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 <div class="row">
                     <div class="col-12">
                         <div class="divider mt-50 mb-50"></div>
@@ -674,30 +644,18 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @if(Cart::instance('cart')->count()>0)
+                                        @foreach (Cart::instance('cart')->content() as $item)
                                         <tr>
-                                            <td class="image product-thumbnail"><img src="{{ asset('assets/imgs/shop/product-1-1.jpg') }}" alt="#"></td>
+                                            <td class="image product-thumbnail"><img src="{{ asset('assets/imgs/products')}}/{{$item->model->image}}" alt="#"></td>
                                             <td>
-                                                <h5><a href="product-details.html">Yidarton Women Summer Blue</a></h5> <span class="product-qty">x 2</span>
+                                                <h5><a href="product-details.html">{{$item->model->name}}</a></h5> <span class="product-qty">x {{$item->qty}}</span>
                                             </td>
-                                            <td>$180.00</td>
-                                        </tr>
+                                            <td>${{$item->subtotal}}</td>
                                         <tr>
-                                            <td class="image product-thumbnail"><img src="{{ asset('assets/imgs/shop/product-2-1.jpg') }}" alt="#"></td>
-                                            <td>
-                                                <h5><a href="product-details.html">LDB MOON Women Summe</a></h5> <span class="product-qty">x 1</span>
-                                            </td>
-                                            <td>$65.00</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="image product-thumbnail"><img src="{{ asset('assets/imgs/shop/product-3-1.jpg') }}" alt="#"></td>
-                                            <td><i class="ti-check-box font-small text-muted mr-10"></i>
-                                                <h5><a href="product-details.html">Women's Short Sleeve Loose</a></h5> <span class="product-qty">x 1</span>
-                                            </td>
-                                            <td>$35.00</td>
-                                        </tr>
-                                        <tr>
+                                            @endforeach
                                             <th>SubTotal</th>
-                                            <td class="product-subtotal" colspan="2">$280.00</td>
+                                            <td class="product-subtotal" colspan="2">${{Cart::subtotal()}}</td>
                                         </tr>
                                         <tr>
                                             <th>Shipping</th>
@@ -705,8 +663,11 @@
                                         </tr>
                                         <tr>
                                             <th>Total</th>
-                                            <td colspan="2" class="product-subtotal"><span class="font-xl text-brand fw-900">$280.00</span></td>
+                                            <td colspan="2" class="product-subtotal"><span class="font-xl text-brand fw-900">${{Cart::total()}}</span></td>
                                         </tr>
+                                        @else
+                            <p>No item in cart</p>
+                        @endif
                                     </tbody>
                                 </table>
                             </div>

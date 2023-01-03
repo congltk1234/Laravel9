@@ -4,9 +4,9 @@
         <div class="page-header breadcrumb-wrap">
             <div class="container">
                 <div class="breadcrumb">
-                    <a href="index.html" rel="nofollow">Home</a>
-                    <span></span> Fashion
-                    <span></span> Abstract Print Patchwork Dress
+                    <a href="{{route('shop')}}" rel="nofollow">Home</a>
+                    <a href="{{route('product.category',['slug'=>$product->category->slug])}}"><span></span> {{$product->category->name}}</a>
+                    <span></span> {{$product->name}}
                 </div>
             </div>
         </div>
@@ -431,11 +431,11 @@
                                                             <img class="hover-img" src="{{ asset('assets/imgs/products')}}/{{$rproduct->image}}" alt="">
                                                         </a>
                                                     </div>
-                                                    <div class="product-action-1">
+                                                    {{-- <div class="product-action-1">
                                                         <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-search"></i></a>
                                                         <a aria-label="Add To Wishlist" class="action-btn small hover-up" href="wishlist.php" tabindex="0"><i class="fi-rs-heart"></i></a>
                                                         <a aria-label="Compare" class="action-btn small hover-up" href="compare.php" tabindex="0"><i class="fi-rs-shuffle"></i></a>
-                                                    </div>
+                                                    </div> --}}
                                                     <div class="product-badges product-badges-position product-badges-mrg">
                                                         <span class="hot">Hot</span>
                                                     </div>

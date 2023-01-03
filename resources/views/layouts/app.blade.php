@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-<title>Surfside Media</title>
+<title>Đồ án 2</title>
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -65,7 +65,7 @@
             <div class="container">
                 <div class="header-wrap">
                     <div class="logo logo-width-1">
-                        <a href="index.html"><img src="assets/imgs/logo/logo.png" alt="logo"></a>
+                        <a href="index.html"><img src="{{ asset('assets/imgs/logo/logo.png') }}" alt="logo"></a>
                     </div>
 
                     <div class="header-right">
@@ -94,13 +94,13 @@
                                     <li><a href="#">My Account<i class="fi-rs-angle-down"></i></a>
                                             @if(Auth::user()->utype == 'ADM')
                                             <ul class="sub-menu">
-                                                <li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
+                                                {{-- <li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li> --}}
                                                 <li><a href="{{ route('admin.products') }}">Products</a></li>
                                                 <li><a href="{{ route('admin.categories') }}">Categories</a></li>
                                                 <li><a href="{{ route('admin.home.slider') }}">Manage Sliders</a></li>
-                                                <li><a href="#">Coupons</a></li>
+                                                {{-- <li><a href="#">Coupons</a></li>
                                                 <li><a href="#">Orders</a></li>
-                                                <li><a href="#">Customers</a></li>
+                                                <li><a href="#">Customers</a></li> --}}
                                                 {{-- <li><a href="#">Logout</a></li>                                             --}}
                                             </ul>
                                             @else
@@ -122,6 +122,7 @@
                       @livewire('cart-icon-component')
                         </div>
                     </div>
+                    
                     <p class="mobile-promotion">Happy <span class="text-brand">Mother's Day</span>. Big Sale Up to 40%</p>
                     <div class="header-action-right d-block d-lg-none">
                         <div class="header-action-2">
